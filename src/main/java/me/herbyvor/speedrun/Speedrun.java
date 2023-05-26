@@ -30,11 +30,14 @@ public final class Speedrun extends JavaPlugin {
         //initialise le jeu
         setStarted(false);
 
+        System.out.println("Speedrun plugin by herbyvor : [On]");
+
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        System.out.println("Speedrun plugin by herbyvor : [Off]");
     }
 
     public boolean isStarted;
