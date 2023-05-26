@@ -1,0 +1,11 @@
+name: speedrun
+version: '${project.version}'
+main: me.herbyvor.speedrun.Speedrun
+api-version: 1.19
+authors: [ herbyvor ]
+description: event plugin for my 100 followers
+website: https://play.noskillworld.fr
+commands:
+  start:
+    description: lance le jeu
+    usage: /<command>
