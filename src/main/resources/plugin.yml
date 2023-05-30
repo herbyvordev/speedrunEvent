@@ -6,6 +6,12 @@ authors: [ herbyvor ]
 description: event plugin for my 100 followers
 website: https://play.noskillworld.fr
 commands:
-  start:
+  sr_start:
     description: lance le jeu
+    usage: /<command>
+  sr_stop:
+    description: met fin au jeu
+    usage: /<command>
+  sr_pause:
+    description: met le jeu en pause
     usage: /<command>

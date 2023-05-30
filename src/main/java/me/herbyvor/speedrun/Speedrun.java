@@ -1,9 +1,12 @@
 package me.herbyvor.speedrun;
 
+import me.herbyvor.speedrun.Commands.PauseCommand;
 import me.herbyvor.speedrun.Commands.StartCommand;
-import me.herbyvor.speedrun.Listeners.PortalsListener;
+import me.herbyvor.speedrun.Commands.StopCommand;
+import me.herbyvor.speedrun.Listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,7 +14,7 @@ import java.util.Objects;
 
 public final class Speedrun extends JavaPlugin {
 
-    public Location spawn = new Location(Bukkit.getWorld("world"), 0, 80, 0);
+    public Location spawn;
 
     @Override
     public void onEnable() {
@@ -21,11 +24,22 @@ public final class Speedrun extends JavaPlugin {
         borderSetup();
 
         //register les commandes
-        Objects.requireNonNull(getCommand("start")).setExecutor(new StartCommand(this));
+        Objects.requireNonNull(getCommand("sr_start")).setExecutor(new StartCommand(this));
+        Objects.requireNonNull(getCommand("sr_stop")).setExecutor(new StopCommand(this));
+        Objects.requireNonNull(getCommand("sr_pause")).setExecutor(new PauseCommand(this));
+
 
         //register les listeners
         PluginManager pm =getServer().getPluginManager();
         pm.registerEvents(new PortalsListener(this), this);
+        pm.registerEvents(new JoinListener(this), this);
+        pm.registerEvents(new CreeperDropListener(), this);
+        pm.registerEvents(new PlaceBlockListener(this), this);
+        pm.registerEvents(new PlayerMoveListener(this), this);
+
+        //set le spawn world
+        Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(0,0);
+        spawn = b.getLocation().add(0.5, 1, 0.5);
 
         //initialise le jeu
         setStarted(false);
@@ -40,6 +54,17 @@ public final class Speedrun extends JavaPlugin {
         System.out.println("Speedrun plugin by herbyvor : [Off]");
     }
 
+
+    public boolean isPaused;
+
+    public boolean getPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.isPaused = paused;
+    }
+
     public boolean isStarted;
 
     public boolean getStarted() {
@@ -47,7 +72,7 @@ public final class Speedrun extends JavaPlugin {
     }
 
     public void setStarted(boolean started) {
-        isStarted = started;
+        this.isStarted = started;
     }
 
     public boolean allowNehter;

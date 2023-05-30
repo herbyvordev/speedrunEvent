@@ -10,18 +10,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StartCommand implements CommandExecutor {
+public class StopCommand implements CommandExecutor {
 
     Speedrun main;
 
-    public StartCommand(Speedrun speedrun) {
+    public StopCommand(Speedrun speedrun) {
         this.main = speedrun;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-       Player p;
+        Player p;
 
         if(sender instanceof Player){
             p = (Player) sender;
@@ -32,31 +32,32 @@ public class StartCommand implements CommandExecutor {
         }
 
         //si c la console ou si le player est op :
-        if(main.getStarted()){
+        if(!main.getStarted()){
             if(sender instanceof Player){
                 p = (Player) sender;
-                p.sendMessage("L'event a déjà commencé !");
+                p.sendMessage("L'event n'a pas encore commencé !");
             }else{
-                System.out.println("L'event a déjà commencé !");
+                System.out.println("L'event n'a pas encore commencé !");
             }
             return true;
         }else {
 
-            //start
-            main.setStarted(true);
-            new TimeLineController(main).runTaskTimer(main, 0, 20);
+            //stop
+            main.setStarted(false);
 
             //message
             for (Player a : Bukkit.getServer().getOnlinePlayers()) {
-                a.setGameMode(GameMode.SURVIVAL);
-                a.setInvulnerable(false);
+                a.setGameMode(GameMode.ADVENTURE);
+                a.setInvulnerable(true);
                 a.setFoodLevel(20);
                 a.setHealth(20);
-                a.sendTitle("§6C'est parti !", "Que les meilleurs gagnent !", 10, 200, 10);
+                a.teleport(main.spawn);
+                a.getInventory().clear();
+                a.sendTitle("§6Fin du jeu !", "Un administrateur a mis fin au speedrun !", 10, 200, 10);
                 a.playSound(a.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 15, 1);
             }
 
-            Bukkit.broadcastMessage("§aDébut du Speedrun !");
+            Bukkit.broadcastMessage("§aFin du Speedrun !");
 
         }
 

@@ -16,9 +16,12 @@ public class CreeperDropListener implements Listener {
 
         LivingEntity entity = e.getEntity();
 
-        // getType() is inherited from Entity
         if(entity.getType() == EntityType.CREEPER) {
             e.getDrops().add(new ItemStack(Material.GUNPOWDER, 12));
+        }
+
+        if(entity.getType() == EntityType.SKELETON) {
+            e.getDrops().add(new ItemStack(Material.BONE, 4));
         }
 
     }

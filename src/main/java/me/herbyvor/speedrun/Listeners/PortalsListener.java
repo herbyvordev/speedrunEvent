@@ -16,18 +16,16 @@ public class PortalsListener implements Listener {
 
     @EventHandler
     public void OnPortal(PlayerPortalEvent e){
-        if(!main.getAllowNehter()){
-            e.setCancelled(true);
-            e.getPlayer().sendMessage("§4Le nether est fermé jusqu'à 30 minutes de jeu");
-        }
-    }
-
-    @EventHandler
-    public void OnTeleport(PlayerTeleportEvent e){
         if(!main.getAllowEnd()){
             if(e.getCause().equals(PlayerTeleportEvent.TeleportCause.END_PORTAL)){
                 e.setCancelled(true);
                 e.getPlayer().sendMessage("§4L'end est fermé jusqu'à 50 minutes de jeu");
+            }
+        }
+        if(!main.getAllowNehter()){
+            if(e.getCause().equals(PlayerTeleportEvent.TeleportCause.NETHER_PORTAL)) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage("§4Le nether est fermé jusqu'à 30 minutes de jeu");
             }
         }
     }

@@ -21,9 +21,9 @@ public class Lootchests {
     public void spawnLootChest(String dimension, String valeur){
 
         Random r = new Random();
-        double x = r.nextInt(3000);
+        double x = r.nextInt(6000)-3000;
         double y = 65 + r.nextInt(100);
-        double z = r.nextInt(3000);
+        double z = r.nextInt(6000)-3000;
 
         //création du chest
         Location spawnChest = new Location(Bukkit.getWorld(dimension), x, y, z);

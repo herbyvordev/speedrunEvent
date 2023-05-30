@@ -3,13 +3,8 @@ package me.herbyvor.speedrun.Tasks;
 import me.herbyvor.speedrun.Misc.Lootchests;
 import me.herbyvor.speedrun.Speedrun;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Objects;
-import java.util.Random;
 
 public class TimeLineController extends BukkitRunnable {
 
@@ -26,12 +21,19 @@ public class TimeLineController extends BukkitRunnable {
     public void run() {
 
 
+        if(main.getPaused()){
+            return;
+        }
+
         //initialisation
         if(minutes == 0 && secondes == 0){
             //accès au nether :
             main.setAllowNehter(false);
             //accès a l'end :
             main.setAllowEnd(false);
+
+            //broadcast un message de start !
+
         }
 
         //allowNether
@@ -96,10 +98,23 @@ public class TimeLineController extends BukkitRunnable {
             secondes = 0;
         }
 
+        //fin
         if(!main.getStarted()){
             System.out.println("Le jeu a duré " + minutes + " minutes et " + secondes + " secondes. gg!");
+            Bukkit.broadcastMessage("§6Le jeu a duré " + minutes + " minutes et " + secondes + " secondes. gg!");
             cancel();
         }
 
+        //debug toutes les 5 minutes
+        if((minutes%5)==0 && secondes == 0){
+            System.out.println("===================================================================");
+            System.out.println("Le jeu est lancé depuis " + minutes + " minutes et " + secondes + " secondes.");
+            System.out.println("Is started : " + main.getStarted());
+            System.out.println("Allow Nether : " + main.getAllowEnd());
+            System.out.println("Allow End : " + main.getAllowEnd());
+            System.out.println("Paused : " + main.getPaused());
+            System.out.println("Nombre de joueurs : " + Bukkit.getOnlinePlayers().size());
+            System.out.println("===================================================================");
+        }
     }
 }

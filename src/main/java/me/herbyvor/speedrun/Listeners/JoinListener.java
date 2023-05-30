@@ -21,6 +21,9 @@ public class JoinListener implements Listener {
     @EventHandler
     public void OnJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+
+        System.out.println("Le joueur " + p.getDisplayName() + " viens de rejoindre le serveur.");
+
         if(!main.getStarted()){
             p.teleport(main.spawn);
             p.setGameMode(GameMode.ADVENTURE);
