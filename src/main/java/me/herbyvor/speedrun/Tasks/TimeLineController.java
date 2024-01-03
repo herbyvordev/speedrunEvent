@@ -10,12 +10,16 @@ public class TimeLineController extends BukkitRunnable {
 
     Speedrun main;
 
-    public TimeLineController(Speedrun speedrun){
+    Lootchests lootchests;
+
+    public TimeLineController(Speedrun speedrun, Lootchests lootchests){
         this.main = speedrun;
+        this.lootchests = lootchests;
     }
 
     private int secondes = 0;
     public int minutes = 0;
+
 
     @Override
     public void run() {
@@ -50,43 +54,43 @@ public class TimeLineController extends BukkitRunnable {
 
         //lootchests
         if(minutes == 10 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "commun");
+            lootchests.spawnLootChest("world", "commun");
         }
         if(minutes == 20 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "rare");
+            lootchests.spawnLootChest("world", "rare");
         }
         if(minutes == 35 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "commun");
+            lootchests.spawnLootChest("world", "commun");
         }
         if(minutes == 45 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "rare");
+            lootchests.spawnLootChest("world", "rare");
         }
         if(minutes == 60 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "légendaire");
+            lootchests.spawnLootChest("world", "légendaire");
         }
         if(minutes == 80 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "rare");
+            lootchests.spawnLootChest("world", "rare");
         }
         if(minutes == 90 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "commun");
+            lootchests.spawnLootChest("world", "commun");
         }
         if(minutes == 105 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "légendaire");
+            lootchests.spawnLootChest("world", "légendaire");
         }
         if(minutes == 120 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "rare");
+            lootchests.spawnLootChest("world", "rare");
         }
         if(minutes == 150 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "commun");
+            lootchests.spawnLootChest("world", "commun");
         }
         if(minutes == 180 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "rare");
+            lootchests.spawnLootChest("world", "rare");
         }
         if(minutes == 210 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "commun");
+            lootchests.spawnLootChest("world", "commun");
         }
         if(minutes == 240 && secondes == 0){
-            new Lootchests(main).spawnLootChest("world", "légendaire");
+            lootchests.spawnLootChest("world", "légendaire");
             Bukkit.broadcastMessage("§4Il s'agissait du dernier lootchest !");
         }
 

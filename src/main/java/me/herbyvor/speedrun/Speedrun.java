@@ -26,7 +26,7 @@ public final class Speedrun extends JavaPlugin {
         Objects.requireNonNull(getCommand("sr_start")).setExecutor(new StartCommand(this));
         Objects.requireNonNull(getCommand("sr_stop")).setExecutor(new StopCommand(this));
         Objects.requireNonNull(getCommand("sr_pause")).setExecutor(new PauseCommand(this));
-        Objects.requireNonNull(getCommand("sr_setEndSpot")).setExecutor(new SetEndSpotCommand(this));
+        Objects.requireNonNull(getCommand("sr_setEndSpot")).setExecutor(new SetEndSpotCommand(this, this));
         Objects.requireNonNull(getCommand("sr_test")).setExecutor(new TestCommand(this));
 
         //register les listeners

@@ -14,11 +14,12 @@ public class EggCountdown extends BukkitRunnable {
 
     Speedrun main;
     private int secondes = 90;
-    private Location eggBlock;
-    private Player player;
+    private final Location eggBlock;
+    private final Player player;
     public EggCountdown(Speedrun main, Location shrineBlock, Player player){
         this.main = main;
         this.eggBlock = shrineBlock;
+        this.player = player;
     }
 
 
@@ -33,7 +34,8 @@ public class EggCountdown extends BukkitRunnable {
             //on continue
             //on affiche a tous les joueurs
             for(Player p : Bukkit.getServer().getOnlinePlayers()){
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("L'oeuf a été posé par " + player.getDisplayName() + " !\n" + "Il reste " + secondes + "s avant qu'il gagne !"));
+                String message = "L'oeuf a été posé par " + player.getDisplayName() + " !\n" + "Il reste " + secondes + "s";
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
 
             if(secondes == 20){

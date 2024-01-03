@@ -25,7 +25,8 @@ public class TestCommand extends Utils implements CommandExecutor {
             return true;
         }
 
-        p.getInventory().addItem(createGuiItem(Material.DRAGON_EGG, "", ""));
+        //for test purposes
+        //p.getInventory().addItem(createGuiItem(Material.DRAGON_EGG, "", ""));
 
         p.sendMessage("Le bloc situé en : " + main.getEndLoc().getX() + " / " + main.getEndLoc().getY() + " / " + main.getEndLoc().getZ() + " est le spot actuel de remise de l'oeuf.");
 

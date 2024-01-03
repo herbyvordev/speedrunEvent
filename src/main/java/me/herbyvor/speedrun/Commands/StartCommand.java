@@ -1,5 +1,6 @@
 package me.herbyvor.speedrun.Commands;
 
+import me.herbyvor.speedrun.Misc.Lootchests;
 import me.herbyvor.speedrun.Speedrun;
 import me.herbyvor.speedrun.Tasks.TimeLineController;
 import org.bukkit.Bukkit;
@@ -44,7 +45,7 @@ public class StartCommand implements CommandExecutor {
 
             //start
             main.setStarted(true);
-            new TimeLineController(main).runTaskTimer(main, 0, 20);
+            new TimeLineController(main, new Lootchests(main)).runTaskTimer(main, 0, 20);
 
             //message
             for (Player a : Bukkit.getServer().getOnlinePlayers()) {
