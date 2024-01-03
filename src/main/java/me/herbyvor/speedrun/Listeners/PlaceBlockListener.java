@@ -1,6 +1,8 @@
 package me.herbyvor.speedrun.Listeners;
 
 import me.herbyvor.speedrun.Speedrun;
+import me.herbyvor.speedrun.Tasks.EggCountdown;
+import me.herbyvor.speedrun.Tasks.TimeLineController;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,16 +18,21 @@ public class PlaceBlockListener implements Listener {
     @EventHandler
     public void OnPlaceBlock(BlockPlaceEvent e){
         if(e.getBlockPlaced().getType().equals(Material.DRAGON_EGG)){
-            Location endgame = new Location(Bukkit.getWorld("world"), 0, 65, 0);
-            if(e.getBlockAgainst().getLocation().equals(endgame)){
+            System.out.println("placed draggon egg");
+            if(e.getBlockAgainst().getLocation().equals(main.getEndLoc())){
+                System.out.println("placed against endloc");
                 if(main.getStarted()){
-                    System.out.println(e.getPlayer().getDisplayName() + " viens de rendre le dragon egg");
+                    System.out.println("started = true");
+                    //start timer
+                    System.out.println(e.getPlayer().getDisplayName() + " a posé l'oeuf");
                     for (Player a : Bukkit.getServer().getOnlinePlayers()) {
-                        a.sendTitle("§6Fin", e.getPlayer().getDisplayName() + "viens de rendre le dragon egg !", 10, 200, 10);
-                        a.playSound(a.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 15, 1);
+                        a.sendTitle("§cTimer !", e.getPlayer().getDisplayName() + " a posé l'oeuf !", 10, 80, 10);
+                        a.playSound(a.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 15, 1);
                     }
-                    Bukkit.broadcastMessage("§aFin du Speedrun !");
-                    main.setStarted(false);
+                    Bukkit.broadcastMessage(e.getPlayer().getDisplayName() + " doit défendre l'oeuf pendant 1 minute 30 !");
+
+                    new EggCountdown(main, e.getBlock().getLocation(), e.getPlayer()).runTaskTimer(main, 0, 20);
+
                 }
             }
         }

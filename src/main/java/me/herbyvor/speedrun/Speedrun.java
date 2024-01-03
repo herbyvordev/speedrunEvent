@@ -1,8 +1,6 @@
 package me.herbyvor.speedrun;
 
-import me.herbyvor.speedrun.Commands.PauseCommand;
-import me.herbyvor.speedrun.Commands.StartCommand;
-import me.herbyvor.speedrun.Commands.StopCommand;
+import me.herbyvor.speedrun.Commands.*;
 import me.herbyvor.speedrun.Listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,6 +13,7 @@ import java.util.Objects;
 public final class Speedrun extends JavaPlugin {
 
     public Location spawn;
+    public Location endLoc;
 
     @Override
     public void onEnable() {
@@ -27,7 +26,8 @@ public final class Speedrun extends JavaPlugin {
         Objects.requireNonNull(getCommand("sr_start")).setExecutor(new StartCommand(this));
         Objects.requireNonNull(getCommand("sr_stop")).setExecutor(new StopCommand(this));
         Objects.requireNonNull(getCommand("sr_pause")).setExecutor(new PauseCommand(this));
-
+        Objects.requireNonNull(getCommand("sr_setEndSpot")).setExecutor(new SetEndSpotCommand(this));
+        Objects.requireNonNull(getCommand("sr_test")).setExecutor(new TestCommand(this));
 
         //register les listeners
         PluginManager pm =getServer().getPluginManager();
@@ -36,10 +36,14 @@ public final class Speedrun extends JavaPlugin {
         pm.registerEvents(new CreeperDropListener(), this);
         pm.registerEvents(new PlaceBlockListener(this), this);
         pm.registerEvents(new PlayerMoveListener(this), this);
+        pm.registerEvents(new AchievmentsListener(),this);
 
         //set le spawn world
-        Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(0,0);
+        Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(-49,37);
         spawn = b.getLocation().add(0.5, 1, 0.5);
+
+        //set l'endloc par défaut
+        endLoc = new Location(Bukkit.getServer().getWorld("world"), 0.0, 0.0, 0.0);
 
         //initialise le jeu
         setStarted(false);
@@ -54,6 +58,13 @@ public final class Speedrun extends JavaPlugin {
         System.out.println("Speedrun plugin by herbyvor : [Off]");
     }
 
+    public Location getEndLoc() {
+        return endLoc;
+    }
+
+    public void setEndLoc(Location endLoc) {
+        this.endLoc = endLoc;
+    }
 
     public boolean isPaused;
 

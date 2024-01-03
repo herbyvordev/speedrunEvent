@@ -8,6 +8,8 @@ import org.bukkit.block.Chest;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 import java.util.Random;
 
 public class Lootchests {
@@ -21,9 +23,9 @@ public class Lootchests {
     public void spawnLootChest(String dimension, String valeur){
 
         Random r = new Random();
-        double x = r.nextInt(6000)-3000;
-        double y = 65 + r.nextInt(100);
-        double z = r.nextInt(6000)-3000;
+        double x = r.nextInt(3000)-1500;
+        double z = r.nextInt(3000)-1500;
+        double y = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockYAt((int)x, (int)z) + r.nextInt(100);
 
         //création du chest
         Location spawnChest = new Location(Bukkit.getWorld(dimension), x, y, z);

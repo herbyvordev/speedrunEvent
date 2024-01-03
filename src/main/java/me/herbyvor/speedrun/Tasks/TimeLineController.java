@@ -56,10 +56,9 @@ public class TimeLineController extends BukkitRunnable {
             new Lootchests(main).spawnLootChest("world", "rare");
         }
         if(minutes == 35 && secondes == 0){
-            new Lootchests(main).spawnLootChest("nether", "commun");
+            new Lootchests(main).spawnLootChest("world", "commun");
         }
         if(minutes == 45 && secondes == 0){
-            new Lootchests(main).spawnLootChest("nether", "rare");
             new Lootchests(main).spawnLootChest("world", "rare");
         }
         if(minutes == 60 && secondes == 0){
