@@ -37,6 +37,7 @@ public final class Speedrun extends JavaPlugin {
         pm.registerEvents(new PlaceBlockListener(this), this);
         pm.registerEvents(new PlayerMoveListener(this), this);
         pm.registerEvents(new AchievmentsListener(),this);
+        pm.registerEvents(new EndOpennedListener(this), this);
 
         //set le spawn world
         Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(-49,37);
@@ -49,7 +50,6 @@ public final class Speedrun extends JavaPlugin {
         setStarted(false);
 
         System.out.println("Speedrun plugin by herbyvor : [On]");
-
     }
 
     @Override

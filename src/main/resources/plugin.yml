@@ -5,6 +5,7 @@ api-version: 1.20
 authors: [ herbyvor ]
 description: event plugin for my 100 followers
 website: https://play.noskillworld.fr
+depend: [DeadlyDisasters]
 commands:
   sr_start:
     description: lance le jeu
