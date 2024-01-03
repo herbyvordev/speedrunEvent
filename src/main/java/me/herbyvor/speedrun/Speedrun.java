@@ -108,11 +108,12 @@ public final class Speedrun extends JavaPlugin {
 
     public void borderSetup(){
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setCenter(0, 0);
-        Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setSize(6000);
+        Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setSize(3000);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setDamageAmount(1);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setDamageBuffer(0);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setWarningDistance(2);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setWarningTime(0);
     }
+
 }
 
