@@ -29,7 +29,13 @@ public class TestCommand extends Utils implements CommandExecutor {
         //p.getInventory().addItem(createGuiItem(Material.DRAGON_EGG, "", ""));
 
         p.sendMessage("Le bloc situé en : " + main.getEndLoc().getX() + " / " + main.getEndLoc().getY() + " / " + main.getEndLoc().getZ() + " est le spot actuel de remise de l'oeuf.");
-
+        if(main.getAllowNehter()){
+            main.setAllowNehter(false);
+            p.sendMessage("le nether est désormais fermé");
+        }else{
+            main.setAllowNehter(true);
+            p.sendMessage("le nether est désomrais ouvert");
+        }
 
         return true;
     }

@@ -3,17 +3,14 @@ package me.herbyvor.speedrun.Tasks;
 import me.herbyvor.speedrun.Speedrun;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EggCountdown extends BukkitRunnable {
 
     Speedrun main;
-    private int secondes = 90;
+    private int secondes = 30;
     private final Location eggBlock;
     private final Player player;
     public EggCountdown(Speedrun main, Location shrineBlock, Player player){
@@ -79,6 +76,7 @@ public class EggCountdown extends BukkitRunnable {
             for (Player a : Bukkit.getServer().getOnlinePlayers()) {
                 a.sendTitle("§6Fin", player.getDisplayName() + " a gagné le speedrun !", 10, 200, 10);
                 a.playSound(a.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 15, 1);
+                //a.setGameMode(GameMode.SPECTATOR); // -> a voir
             }
             Bukkit.broadcastMessage("§aFin du Speedrun !");
             main.setStarted(false);

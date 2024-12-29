@@ -1,14 +1,12 @@
 package me.herbyvor.speedrun.Listeners;
 
+import me.herbyvor.speedrun.Misc.EventPlayer;
 import me.herbyvor.speedrun.Speedrun;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
 
 public class JoinListener implements Listener {
 
@@ -30,11 +28,19 @@ public class JoinListener implements Listener {
             p.setInvulnerable(true);
             p.setFoodLevel(20);
             p.setHealth(20);
+
+            //get or create eventPlayer instance
+            EventPlayer ep = main.getEventPlayersFromPlayer(p);
+            if(ep.getTeam() == null){
+                ep.setTeam("spectator");
+                p.sendMessage("Vous n'avez pas d'équipe ! /team");
+            }
         }else {
             if(p.getGameMode() != GameMode.SURVIVAL){
                 p.setGameMode(GameMode.SURVIVAL);
             }
         }
     }
+
 
 }

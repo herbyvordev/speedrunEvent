@@ -1,7 +1,7 @@
 name: speedrun
 version: '${project.version}'
 main: me.herbyvor.speedrun.Speedrun
-api-version: 1.20
+api-version: 1.21
 authors: [ herbyvor ]
 description: event plugin for my 100 followers
 website: https://play.noskillworld.fr

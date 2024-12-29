@@ -2,25 +2,28 @@ package me.herbyvor.speedrun;
 
 import me.herbyvor.speedrun.Commands.*;
 import me.herbyvor.speedrun.Listeners.*;
+import me.herbyvor.speedrun.Misc.EventPlayer;
+import me.herbyvor.speedrun.Misc.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Speedrun extends JavaPlugin {
 
     public Location spawn;
     public Location endLoc;
+    public ArrayList<Team> teams = new ArrayList<Team>();
+    public ArrayList<EventPlayer> eventPlayers = new ArrayList<EventPlayer>();
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-
-        //setup la border
-        borderSetup();
 
         //register les commandes
         Objects.requireNonNull(getCommand("sr_start")).setExecutor(new StartCommand(this));
@@ -40,7 +43,7 @@ public final class Speedrun extends JavaPlugin {
         pm.registerEvents(new EndOpennedListener(this), this);
 
         //set le spawn world
-        Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(-49,37);
+        Block b = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockAt(-171,44);
         spawn = b.getLocation().add(0.5, 1, 0.5);
 
         //set l'endloc par défaut
@@ -48,6 +51,16 @@ public final class Speedrun extends JavaPlugin {
 
         //initialise le jeu
         setStarted(false);
+
+        //setup la border
+        borderSetup();
+
+        //setup les teams par defaut
+        teams.add(new Team("spectator", "§7", "§7"));
+        teams.add(new Team("rouge", "§c", "§c"));
+        teams.add(new Team("bleu", "§9", "§9"));
+        teams.add(new Team("vert", "§a", "§a"));
+        teams.add(new Team("jaune", "§e", "§e"));
 
         System.out.println("Speedrun plugin by herbyvor : [On]");
     }
@@ -107,12 +120,34 @@ public final class Speedrun extends JavaPlugin {
     }
 
     public void borderSetup(){
-        Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setCenter(0, 0);
+        Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setCenter(-171, 44);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setSize(3000);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setDamageAmount(1);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setDamageBuffer(0);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setWarningDistance(2);
         Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().setWarningTime(0);
+    }
+
+    public EventPlayer getEventPlayersFromPlayer(Player p){
+        for(EventPlayer ep : eventPlayers){
+            if(ep.getUuid() == p.getUniqueId()){
+                return ep;
+            }
+        }
+        return new EventPlayer(p.getUniqueId());
+    }
+
+    public Team getTeamFromName(String name){
+        for(Team t : teams){
+            if(t.getName().equals(name)){
+                return t;
+            }
+        }
+        if(teams.isEmpty()){
+            return null;
+        }else{
+            return teams.get(0); //spectator
+        }
     }
 
 }

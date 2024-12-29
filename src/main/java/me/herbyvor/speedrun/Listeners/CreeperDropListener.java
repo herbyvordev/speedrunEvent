@@ -25,7 +25,7 @@ public class CreeperDropListener implements Listener {
         }
 
         if(entity.getType() == EntityType.ENDERMAN) {
-            e.getDrops().add(new ItemStack(Material.ENDER_PEARL, 2));
+            e.getDrops().add(new ItemStack(Material.ENDER_PEARL, 4));
         }
 
         if(entity.getType() == EntityType.WARDEN) {

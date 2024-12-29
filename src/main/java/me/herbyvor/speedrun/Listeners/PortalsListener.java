@@ -47,7 +47,7 @@ public class PortalsListener implements Listener {
 
             //si il a un lit et que c'est safe de l'y tp, on le tp a son lit et on fait rien d'autre
             if(bedloc != null){
-                if(Objects.requireNonNull(Bukkit.getServer().getWorld("world")).getWorldBorder().isInside(bedloc)){
+                if(!Objects.requireNonNull(Bukkit.getServer().getWorld("world")).getWorldBorder().isInside(bedloc)){
                     return;
                 }
             }
@@ -57,7 +57,7 @@ public class PortalsListener implements Listener {
 
         }
         if(e.getFrom().getName().equals("world_nether")){
-            if(Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().isInside(e.getPlayer().getLocation())){
+            if(!Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().isInside(e.getPlayer().getLocation())){
                 rtpToOverworld(p);
                 p.sendMessage("votre portail était situé dans la world border");
             }
@@ -76,14 +76,14 @@ public class PortalsListener implements Listener {
         boolean posx = Math.random() < 0.5;
         boolean posz = Math.random() < 0.5;
         if(posx){
-            x = r.nextInt(max)+200; //entre 500 et max
+            x = r.nextInt(max);
         }else{
-            x = r.nextInt(max)-(max+200); //entre -200 et -max
+            x = -r.nextInt(max);
         }
         if(posz){
-            z = r.nextInt(max)+200; //entre 500 et max
+            z = r.nextInt(max);
         }else{
-            z = r.nextInt(max)-(max+200); //entre -200 et -max
+            z = -r.nextInt(max);
         }
 
         double y = Objects.requireNonNull(Bukkit.getWorld("world")).getHighestBlockYAt((int)x, (int)z);
