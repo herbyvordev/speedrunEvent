@@ -55,11 +55,11 @@ public class Lootchests {
             }
             if (Math.random() * 100 < 50) {
                 ItemStack p4 = new ItemStack(Material.ENCHANTED_BOOK, 1);
-                p4.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+                p4.addUnsafeEnchantment(Enchantment.PROTECTION, 2);
                 contenu.setItem(r.nextInt(contenu.getSize()), p4);
             } else {
                 ItemStack f4 = new ItemStack(Material.ENCHANTED_BOOK, 1);
-                f4.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
+                f4.addUnsafeEnchantment(Enchantment.FEATHER_FALLING, 3);
                 contenu.setItem(r.nextInt(contenu.getSize()), f4);
             }
             if (Math.random() * 100 < 50) {
@@ -156,7 +156,7 @@ public class Lootchests {
             if (Math.random() * 100 < 10) { contenu.setItem(r.nextInt(contenu.getSize()), new ItemStack(Material.GOLDEN_APPLE, 1)); }
 
             ItemStack tu3 = new ItemStack(Material.TRIDENT, 1);
-            tu3.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
+            tu3.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
             tu3.addUnsafeEnchantment(Enchantment.LOYALTY, 1);
             contenu.setItem(r.nextInt(contenu.getSize()), tu3);
 
@@ -172,11 +172,11 @@ public class Lootchests {
 
             if (Math.random() * 100 < 50) {
                 ItemStack p4 = new ItemStack(Material.ENCHANTED_BOOK, 1);
-                p4.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+                p4.addUnsafeEnchantment(Enchantment.PROTECTION, 2);
                 contenu.setItem(r.nextInt(contenu.getSize()), p4);
             } else {
                 ItemStack f4 = new ItemStack(Material.ENCHANTED_BOOK, 1);
-                f4.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
+                f4.addUnsafeEnchantment(Enchantment.PROTECTION, 3);
                 contenu.setItem(r.nextInt(contenu.getSize()), f4);
             }
 

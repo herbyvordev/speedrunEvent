@@ -1,6 +1,7 @@
 package me.herbyvor.speedrun;
 
 import me.herbyvor.speedrun.Commands.*;
+import me.herbyvor.speedrun.Guis.TeamSelectionGui;
 import me.herbyvor.speedrun.Listeners.*;
 import me.herbyvor.speedrun.Misc.EventPlayer;
 import me.herbyvor.speedrun.Misc.Team;
@@ -31,6 +32,9 @@ public final class Speedrun extends JavaPlugin {
         Objects.requireNonNull(getCommand("sr_pause")).setExecutor(new PauseCommand(this));
         Objects.requireNonNull(getCommand("sr_setEndSpot")).setExecutor(new SetEndSpotCommand(this, this));
         Objects.requireNonNull(getCommand("sr_test")).setExecutor(new TestCommand(this));
+        Objects.requireNonNull(getCommand("sr_admin_team")).setExecutor(new AdminTeamCommand());
+        Objects.requireNonNull(getCommand("sr_team")).setExecutor(new TeamCommand());
+        //cmd de team
 
         //register les listeners
         PluginManager pm =getServer().getPluginManager();
@@ -56,11 +60,14 @@ public final class Speedrun extends JavaPlugin {
         borderSetup();
 
         //setup les teams par defaut
-        teams.add(new Team("spectator", "§7", "§7"));
+        teams.add(new Team("spectateurs", "§7", "§7"));
         teams.add(new Team("rouge", "§c", "§c"));
         teams.add(new Team("bleu", "§9", "§9"));
         teams.add(new Team("vert", "§a", "§a"));
         teams.add(new Team("jaune", "§e", "§e"));
+
+        //setup le keep inv
+        setKeepInv(true);
 
         System.out.println("Speedrun plugin by herbyvor : [On]");
     }
@@ -148,6 +155,12 @@ public final class Speedrun extends JavaPlugin {
         }else{
             return teams.get(0); //spectator
         }
+    }
+
+    public void setKeepInv(boolean bool){
+        Objects.requireNonNull(Bukkit.getWorld("world")).setGameRule(org.bukkit.GameRule.KEEP_INVENTORY, bool);
+        Objects.requireNonNull(Bukkit.getWorld("world_nether")).setGameRule(org.bukkit.GameRule.KEEP_INVENTORY, bool);
+        Objects.requireNonNull(Bukkit.getWorld("world_the_end")).setGameRule(org.bukkit.GameRule.KEEP_INVENTORY, bool);
     }
 
 }

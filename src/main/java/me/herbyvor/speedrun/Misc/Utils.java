@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Utils {
 
-    protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
+    public ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
 

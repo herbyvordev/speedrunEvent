@@ -1,5 +1,6 @@
 package me.herbyvor.speedrun.Commands;
 
+import me.herbyvor.speedrun.Misc.EventPlayer;
 import me.herbyvor.speedrun.Misc.Team;
 import me.herbyvor.speedrun.Speedrun;
 import org.bukkit.command.Command;
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class AdminTeamCommand implements CommandExecutor {
 
-    private static final Speedrun main = Speedrun.getPlugin(Speedrun.class);
+    private static final Speedrun main = Speedrun.getPlugin(Speedrun.class); //mieux de faire comme ca ou avec un constructeur ? a voir
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -69,7 +70,11 @@ public class AdminTeamCommand implements CommandExecutor {
             StringBuilder msg = new StringBuilder("Liste des équipes : \n");
 
             for (Team team : main.teams) {
-                msg.append(team.getPrefix()).append(team.getName()).append(", \n");
+                msg.append(" - ").append(team.getPrefix()).append(team.getName()).append(" : ");
+                for (EventPlayer player : team.getPlayers()) {
+                    msg.append(player.getName()).append(", ");
+                }
+                msg.append("\n");
             }
 
             p.sendMessage(msg.toString());

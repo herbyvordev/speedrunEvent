@@ -1,7 +1,10 @@
 package me.herbyvor.speedrun.Misc;
 
 import me.herbyvor.speedrun.Speedrun;
+import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class EventPlayer {
@@ -16,11 +19,11 @@ public class EventPlayer {
         this.uuid = uuid;
         this.team = team;
         team.addPlayer(this);
+        initName();
     }
 
     public EventPlayer(UUID uuid){
-        this.uuid = uuid;
-        this.team = null;
+        this(uuid, null);
     }
 
     public void setTeam(Team team){
@@ -47,5 +50,16 @@ public class EventPlayer {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void initName() {
+        Player player = main.getServer().getPlayer(uuid);
+        if(player != null){
+            this.name = player.getDisplayName();
+        }
     }
 }

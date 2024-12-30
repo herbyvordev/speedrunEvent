@@ -1,26 +1,48 @@
 package me.herbyvor.speedrun.Misc;
 
+import org.bukkit.Material;
+
 import java.util.ArrayList;
 
 public class Team {
 
-    public static String name;
-    public static String color;
-    public static String prefix;
+    public String name;
+    public String color;
+    public String prefix;
+
+    public Material guiBlock;
 
     public ArrayList<EventPlayer> eventPlayers = new ArrayList<EventPlayer>();
 
     public Team(String name, String color, String prefix){
-        Team.name = name;
-        Team.color = color;
-        Team.prefix = prefix;
+        this.name = name;
+        this.color = color;
+        this.prefix = prefix;
+        switch (color){
+            case "bleu":
+                guiBlock = Material.BLUE_CONCRETE;
+                break;
+            case "rouge":
+                guiBlock = Material.RED_CONCRETE;
+                break;
+            case "vert":
+                guiBlock = Material.GREEN_CONCRETE;
+                break;
+            case "jaune":
+                guiBlock = Material.YELLOW_CONCRETE;
+                break;
+            case "spectateurs":
+                guiBlock = Material.GRAY_CONCRETE;
+                break;
+            default:
+                guiBlock = Material.WHITE_CONCRETE;
+                break;
+        }
     }
 
     public Team(String name, String color){
         this(name, color, color);
     }
-
-    //players
 
     public void addPlayer(EventPlayer eventPlayer){
         eventPlayers.add(eventPlayer);
@@ -33,8 +55,6 @@ public class Team {
     public ArrayList<EventPlayer> getPlayers(){
         return eventPlayers;
     }
-
-    //teams
 
     public void DisbandTeam(){
         for(EventPlayer eventPlayer : eventPlayers){
@@ -56,18 +76,26 @@ public class Team {
         return prefix;
     }
 
+    public Material getGuiBlock() {
+        return guiBlock;
+    }
+
     //setters
 
     public void setName(String name){
-        Team.name = name;
+        this.name = name;
     }
 
     public void setColor(String color){
-        Team.color = color;
+        this.color = color;
     }
 
     public void setPrefix(String prefix){
-        Team.prefix = prefix;
+        this.prefix = prefix;
+    }
+
+    public void setGuiBlock(Material guiBlock) {
+        this.guiBlock = guiBlock;
     }
 
 }
