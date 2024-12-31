@@ -13,26 +13,33 @@ public class EventPlayer {
 
     private UUID uuid;
     private String name;
-    private Team team;
+    private Team team; @Nonnull
 
     public EventPlayer(UUID uuid, Team team){
         this.uuid = uuid;
         this.team = team;
         team.addPlayer(this);
         initName();
+        System.out.println("Created player " + name + " in team " + team.getName());
+    }
+
+    public EventPlayer(UUID uuid, String team){
+        this(uuid, main.getTeamFromName(team));
     }
 
     public EventPlayer(UUID uuid){
-        this(uuid, null);
+        this(uuid, "spectateurs");
     }
 
     public void setTeam(Team team){
         if(this.team != null){
             this.team.removePlayer(this);
+            System.out.println("Removed player from team " + this.team.getName());
         }
         this.team = team;
         if(team != null){
             team.addPlayer(this);
+            System.out.println("Added player to team " + team.getName());
         }
     }
 
@@ -60,6 +67,7 @@ public class EventPlayer {
         Player player = main.getServer().getPlayer(uuid);
         if(player != null){
             this.name = player.getDisplayName();
+            System.out.println("Player name set to " + name);
         }
     }
 }

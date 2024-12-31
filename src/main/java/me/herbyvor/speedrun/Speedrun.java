@@ -138,9 +138,11 @@ public final class Speedrun extends JavaPlugin {
     public EventPlayer getEventPlayersFromPlayer(Player p){
         for(EventPlayer ep : eventPlayers){
             if(ep.getUuid() == p.getUniqueId()){
+                System.out.println("player " + p.getDisplayName() + " already exists");
                 return ep;
             }
         }
+        System.out.println("player " + p.getDisplayName() + " does not exist, creating new instance");
         return new EventPlayer(p.getUniqueId());
     }
 

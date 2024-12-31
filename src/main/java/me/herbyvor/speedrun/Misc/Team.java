@@ -18,7 +18,7 @@ public class Team {
         this.name = name;
         this.color = color;
         this.prefix = prefix;
-        switch (color){
+        switch (name){
             case "bleu":
                 guiBlock = Material.BLUE_CONCRETE;
                 break;
@@ -45,6 +45,11 @@ public class Team {
     }
 
     public void addPlayer(EventPlayer eventPlayer){
+        if(eventPlayers.contains(eventPlayer)){
+            System.out.println("Player already in team");
+            return;
+        }
+        System.out.println("Added player " + eventPlayer.getName() + " in team " + name);
         eventPlayers.add(eventPlayer);
     }
 

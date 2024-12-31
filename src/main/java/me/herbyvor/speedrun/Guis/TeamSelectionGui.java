@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 
@@ -23,7 +24,9 @@ public class TeamSelectionGui {
 
     public void initializeItems(EventPlayer p) {
         //oui
-        for (Team team : main.teams){
+        for (int j = 0; j < main.teams.size() - 1; j++) {
+
+            Team team = main.teams.get(j);
 
             StringBuilder lore = new StringBuilder();
 
@@ -43,10 +46,11 @@ public class TeamSelectionGui {
             ItemStack item = utils.createGuiItem(team.getGuiBlock(), team.getName(), lore.toString());
 
             if(team == p.getTeam()){
-                item.addEnchantment(Enchantment.UNBREAKING, 1);
+                item.addUnsafeEnchantment(Enchantment.UNBREAKING, 1);
+                Objects.requireNonNull(item.getItemMeta()).addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
 
-            inv.addItem(item);
+            inv.setItem(j, item);
 
         }
     }

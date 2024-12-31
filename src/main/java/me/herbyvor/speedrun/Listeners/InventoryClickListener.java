@@ -22,7 +22,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void OnInventoryClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
-        if(e.getClickedInventory().equals(inventory)){
+        if(Objects.equals(e.getClickedInventory(), inventory)){
             e.setCancelled(true);
             if(e.getCurrentItem() != null){
                 for (Team team : main.teams){

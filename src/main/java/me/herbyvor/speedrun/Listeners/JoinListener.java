@@ -34,6 +34,7 @@ public class JoinListener implements Listener {
             if(ep.getTeam() == null){
                 ep.setTeam("spectator");
                 p.sendMessage("Vous n'avez pas d'équipe ! /team");
+                System.out.println("Le joueur " + p.getDisplayName() + " n'a pas d'équipe !");
             }
         }else {
             if(p.getGameMode() != GameMode.SURVIVAL){
